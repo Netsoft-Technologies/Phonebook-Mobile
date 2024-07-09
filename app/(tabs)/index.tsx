@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import {
   Text,
@@ -69,6 +70,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <TextInput
         style={styles.searchInput}
         placeholder="Search..."
@@ -80,15 +82,21 @@ export default function Index() {
         <View key={item.id} style={styles.itemContainer}>
           <View style={styles.itemHeader}>
             <Text style={styles.itemName}>{item.fullName}</Text>
-            <Text style={styles.itemCompany}>{item.company || "N/A"}</Text>
+            {item.company !== null && item.company !== "-" && (
+              <Text style={styles.itemCompany}>{item.company}</Text>
+            )}
           </View>
-          <Text style={styles.itemText}>
-            Work Phone: {item.workPhone || "N/A"}
-          </Text>
-          <Text style={styles.itemText}>
-            Mobile Phone: {item.mobilePhone || "N/A"}
-          </Text>
-          <Text style={styles.itemText}>Email: {item.email || "N/A"}</Text>
+          {item.workPhone !== null && item.workPhone !== "-" && (
+            <Text style={styles.itemText}>Work Phone: {item.workPhone}</Text>
+          )}
+          {item.mobilePhone !== null && item.mobilePhone !== "-" && (
+            <Text style={styles.itemText}>
+              Mobile Phone: {item.mobilePhone}
+            </Text>
+          )}
+          {item.email !== null && item.email !== "-" && (
+            <Text style={styles.itemText}>Email: {item.email}</Text>
+          )}
         </View>
       ))}
     </View>
